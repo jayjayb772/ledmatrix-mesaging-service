@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jayjayb772/ledmatrix-mesaging-service#readme",
   "dependencies": {
+    "@jest/globals": "^26.4.2",
     "express": "^4.17.1"
   },
   "devDependencies": {
