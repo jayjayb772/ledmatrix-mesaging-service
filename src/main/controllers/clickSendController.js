@@ -10,6 +10,7 @@ clickSendController.get('/', (req, res)=>{
 
 
 clickSendController.post('/incoming-message', (req, res) =>{
+   res.send().ok;
    debuglog("REQ PARAMS")
    let from = req.params.from;
    debuglog("FROM:");
@@ -20,10 +21,6 @@ clickSendController.post('/incoming-message', (req, res) =>{
    let timestamp = req.params.timestamp;
    debuglog("TIMESTAMP:");
    debuglog(req.params.timestamp);
-
-
-
-   res.send();
 });
 
 module.exports = clickSendController;
