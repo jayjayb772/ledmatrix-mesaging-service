@@ -20,9 +20,24 @@
   "homepage": "https://github.com/jayjayb772/ledmatrix-mesaging-service#readme",
   "dependencies": {
     "@jest/globals": "^26.4.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "@esri/arcgis-rest-auth": "^2.12.1",
+    "@esri/arcgis-rest-request": "^2.12.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "cross-fetch": "^3.0.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express-formidable": "^1.2.0",
+    "http-errors": "~1.6.3",
+    "isomorphic-form-data": "^2.0.0",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "pug": "^2.0.4",
+    "request": "^2.88.2"
   },
   "devDependencies": {
+    "request": "^2.88.2",
     "dotenv": "^8.2.0",
     "http-errors": "^1.8.0",
     "jest": "^26.4.2",
