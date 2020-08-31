@@ -24,7 +24,7 @@ clickSendController.post('/incoming-message', (req, res) =>{
 
 
 
-   res.ok;
+   res.send();
 });
 
 module.exports = clickSendController;
