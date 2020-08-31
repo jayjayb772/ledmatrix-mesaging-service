@@ -11,16 +11,16 @@ clickSendController.get('/', (req, res)=>{
 
 clickSendController.post('/incoming-message', (req, res) =>{
    debuglog(req.from);
-   let body = req.body;
-   //let from = req.body.from;
+   let body = req.body.toJSON();
+   let from = body.from;
    debuglog("FROM:");
-   debuglog(req.body.from);
-   let message = req.body.message;
+   debuglog(body.from);
+   let message = body.message;
    debuglog("TEXT MESSAGE:");
-   debuglog(req.body.message);
-   let timestamp = req.body.timestamp;
+   debuglog(body.message);
+   let timestamp = body.timestamp;
    debuglog("TIMESTAMP:");
-   debuglog(req.body.timestamp);
+   debuglog(body.timestamp);
 
 
 
