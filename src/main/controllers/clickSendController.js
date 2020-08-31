@@ -11,6 +11,9 @@ clickSendController.get('/', (req, res)=>{
 
 clickSendController.post('/incoming-message', (req, res) =>{
    let body = req.toJSON();
+   debuglog("REQ PARAMS")
+   debuglog(req.params.from);
+   debuglog("REQ TO JSON")
    debuglog(body);
    // let from = body.from;
    // debuglog("FROM:");
