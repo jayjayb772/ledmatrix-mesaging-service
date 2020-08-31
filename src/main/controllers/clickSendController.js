@@ -10,20 +10,16 @@ clickSendController.get('/', (req, res)=>{
 
 
 clickSendController.post('/incoming-message', (req, res) =>{
-   let body = req.toJSON();
    debuglog("REQ PARAMS")
+   let from = req.params.from;
+   debuglog("FROM:");
    debuglog(req.params.from);
-   debuglog("REQ TO JSON")
-   debuglog(body);
-   // let from = body.from;
-   // debuglog("FROM:");
-   // debuglog(body.from);
-   // let message = body.message;
-   // debuglog("TEXT MESSAGE:");
-   // debuglog(body.message);
-   // let timestamp = body.timestamp;
-   // debuglog("TIMESTAMP:");
-   // debuglog(body.timestamp);
+   let message = req.params.message;
+   debuglog("TEXT MESSAGE:");
+   debuglog(req.params.message);
+   let timestamp = req.params.timestamp;
+   debuglog("TIMESTAMP:");
+   debuglog(req.params.timestamp);
 
 
 
