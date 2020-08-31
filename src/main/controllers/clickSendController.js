@@ -14,13 +14,13 @@ clickSendController.post('/incoming-message', (req, res) =>{
    let body = req.body;
    //let from = req.body.from;
    debuglog("FROM:");
-   //debuglog(req.body.from);
-   //let message = req.body.message;
+   debuglog(req.body.from);
+   let message = req.body.message;
    debuglog("TEXT MESSAGE:");
-   //debuglog(req.body.message);
-   //let timestamp = req.body.timestamp;
+   debuglog(req.body.message);
+   let timestamp = req.body.timestamp;
    debuglog("TIMESTAMP:");
-   //debuglog(req.body.timestamp);
+   debuglog(req.body.timestamp);
 
 
 
