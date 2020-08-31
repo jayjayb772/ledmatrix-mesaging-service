@@ -2,10 +2,10 @@ const express = require('express');
 
 const clickSendController = express.Router()
 
-clickSendController.use(function timeLog (req, res, next) {
-   console.log('Time: ', Date.now())
-   next()
+clickSendController.get('/', (req, res)=>{
+   res.send("click send controller home");
 })
+
 
 clickSendController.post('/incoming-message', (req, res) =>{
    console.log(req);
