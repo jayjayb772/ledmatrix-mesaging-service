@@ -2,9 +2,10 @@
   "name": "ledmatrix-mesaging-service",
   "version": "1.0.0",
   "description": "LED MATRIX PROGRAMS",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,8 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "jest": "^26.4.2"
+    "http-errors": "^1.8.0",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4"
   }
 }
