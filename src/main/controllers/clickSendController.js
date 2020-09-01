@@ -12,16 +12,15 @@ clickSendController.get('/', (req, res)=>{
 clickSendController.post('/incoming-message', (req, res) =>{
    res.send().ok;
    debuglog("REQ PARAMS")
-   // let from = req.params.from;
-   // debuglog("FROM:");
-   debuglog(req.hasBody)
-   debuglog(req.body);
-   // let message = req.params.message;
-   // debuglog("TEXT MESSAGE:");
-   // debuglog(req.params.message);
-   // let timestamp = req.params.timestamp;
-   // debuglog("TIMESTAMP:");
-   // debuglog(req.params.timestamp);
+   let from = req.params.from;
+   debuglog("FROM:");
+   debuglog(req.body.from);
+   let message = req.body.message;
+   debuglog("TEXT MESSAGE:");
+   debuglog(req.body.message);
+   let timestamp = req.body.timestamp;
+   debuglog("TIMESTAMP:");
+   debuglog(req.body.timestamp);
 });
 
 module.exports = clickSendController;

@@ -5,7 +5,9 @@ const orchestratorController = require('./src/main/controllers/orchestratorContr
 const app = express();
 const {debuglog} = require('./src/main/util/debugCommands');
 const ENV = process.env.ENV;
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) =>{
