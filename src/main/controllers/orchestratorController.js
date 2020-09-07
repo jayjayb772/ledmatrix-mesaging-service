@@ -9,6 +9,18 @@ orchestratorController.get('/', (req, res) => {
     res.send("Orchestrator controller home");
 })
 
+/**
+ * @swagger
+ *
+ * /orchestrator/contact-lists:
+ *   get:
+ *     description: gets all contact lists
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: send a text
+ */
 orchestratorController.get('/contact-lists', (req, res) => {
     debuglog('Contact List')
     let getContactsPromise = getClicksendContacts()
@@ -20,7 +32,24 @@ orchestratorController.get('/contact-lists', (req, res) => {
     })
 })
 
-
+/**
+ * @swagger
+ *
+ * /orchestrator/contact-lists/{relationship}:
+ *   get:
+ *     description: gets relationship list
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: relationship
+ *         description: relation for list search.
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: send a text
+ */
 orchestratorController.get('/contact-lists/:relationship', (req, res) => {
     let relationship = req.params.relationship
     debuglog(`${relationship} Contact List`)
@@ -31,11 +60,31 @@ orchestratorController.get('/contact-lists/:relationship', (req, res) => {
     })
 })
 
-orchestratorController.post('/incoming-message', (req, res) => {
-    debuglog("message from Orchestrator")
-    res.ok;
-});
-
+/**
+ * @swagger
+ *
+ * /orchestrator/send-text-single:
+ *   post:
+ *     description: send multiple texts
+ *     consumes:
+ *         - application/json
+ *     parameters:
+ *         - in: body
+ *           name: body
+ *           description: body
+ *           schema:
+ *              type: object
+ *              required:
+ *                  - userName
+ *              properties:
+ *                  to:
+ *                      type: string
+ *                  message:
+ *                      type: string
+ *     responses:
+ *       200:
+ *         description: send a text
+ */
 orchestratorController.post('/send-text-single', (req, res) => {
     res.ok;
     let textInfo = sendSingleTextDTO(req.body)
@@ -50,6 +99,31 @@ orchestratorController.post('/send-text-single', (req, res) => {
 
 })
 
+/**
+ * @swagger
+ *
+ * /orchestrator/send-text-multiple:
+ *   post:
+ *     description: send multiple texts
+ *     consumes:
+ *         - application/json
+ *     parameters:
+ *         - in: body
+ *           name: body
+ *           description: message and relation
+ *           schema:
+ *              type: object
+ *              required:
+ *                  - userName
+ *              properties:
+ *                  relationship:
+ *                      type: string
+ *                  message:
+ *                      type: string
+ *     responses:
+ *       200:
+ *         description: send a text
+ */
 orchestratorController.post('/send-text-multiple', (req, res) => {
     res.ok;
     let textInfo = sendMultipleTextsDTO(req.body)
@@ -62,6 +136,5 @@ orchestratorController.post('/send-text-multiple', (req, res) => {
         res.send(err).status(err.http_status)
     })
 })
-
 
 module.exports = orchestratorController;
