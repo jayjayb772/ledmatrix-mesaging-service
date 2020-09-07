@@ -1,7 +1,7 @@
-const express = require('express');
-
+const express = require('express')
+const {clickSendTextDTO} = require('../DataObjects/clicksendTextDTO')
 const clickSendController = express.Router()
-const {debuglog} = require('../util/debugCommands');
+const {debuglog} = require('../util/debugCommands')
 
 clickSendController.get('/', (req, res)=>{
    debuglog("click send controller home");
@@ -11,16 +11,13 @@ clickSendController.get('/', (req, res)=>{
 
 clickSendController.post('/incoming-message', (req, res) =>{
    res.send().ok;
+   let text = clickSendTextDTO(req.body)
    debuglog("REQ PARAMS")
-   let from = req.body.from;
    debuglog("FROM:");
-   debuglog(req.body.from);
-   let message = req.body.message;
+   debuglog(text.from);
    debuglog("TEXT MESSAGE:");
-   debuglog(req.body.message);
-   let timestamp = req.body.timestamp;
+   debuglog(text.message);
    debuglog("TIMESTAMP:");
-   debuglog(req.body.timestamp);
+   debuglog(text.timestamp);
 });
-
 module.exports = clickSendController;

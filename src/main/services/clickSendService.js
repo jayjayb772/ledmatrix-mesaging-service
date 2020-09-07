@@ -4,40 +4,97 @@ const {debuglog} = require("../util/debugCommands");
 
 
 //region createUrl
-function makeHeader(){
+function makeHeader() {
     let temp = "";
-    temp+=process.env.CSAPI_USER;
-    temp+=":";
-    temp+=process.env.CSAPI_KEY;
+    temp += process.env.CSAPI_USER;
+    temp += ":";
+    temp += process.env.CSAPI_KEY;
     return base64url.encode(temp);
 }
 
-function createOptions(url){
+function createOptions(url) {
     let options = {
         headers: {
             Authorization: `Basic ${makeHeader()}==`
         },
-        url:url
+        url: url
     }
     return options
 }
+
 //endregion
 
-function getClicksendContacts(){
-    let options = createOptions("https://rest.clicksend.com/v3/lists")
+//region filters
+function familyFilter(list) {
+    return list.list_name === 'Family'
+}
 
-    request.get(options,(err, res, body) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        let betterBody = JSON.parse(res.body.toString())
-        debuglog(res.statusMessage);
-        debuglog(betterBody.data.data);
-        return betterBody.data
-    });
+function residentFilter(list) {
+    return list.list_name === 'Residents'
+}
+
+function friendFilter(list) {
+    return list.list_name === 'Friends'
+}
+
+function determineFilter(lists, relationship) {
+    switch (relationship) {
+        case 'Family':
+            return lists.filter(familyFilter)
+        case 'Friends':
+            return lists.filter(friendFilter)
+        case 'Residents':
+            return lists.filter(residentFilter)
+        default:
+            return "Unknown Relationship"
+    }
+}
+
+//endregion
+
+//region contactLists
+async function getClicksendContacts() {
+    let options = createOptions("https://rest.clicksend.com/v3/lists")
+    let betterBody;
+    return new Promise(function (resolve, reject) {
+        request.get(options, (err, res) => {
+            if (err) {
+                //console.error(err);
+                reject(err)
+            } else {
+                betterBody = JSON.parse(res.body.toString())
+                //debuglog(res.statusMessage);
+                //debuglog(betterBody.data.data);
+                resolve(betterBody.data.data);
+            }
+        })
+    })
+
 }
 
 
+async function getSpecifiedContactList(relationship) {
+    return new Promise(function (resolve, reject) {
+        let contactsPromise = getClicksendContacts()
+        contactsPromise.then(function (lists) {
+            let contacts = determineFilter(lists, relationship)
+            resolve(contacts);
 
-module.exports = {getClicksendContacts}
+        }, function (err) {
+            console.log(err);
+            reject(err)
+        })
+    })
+}
+
+//endregion
+
+//region getNumbers
+
+//endregion
+
+//region sendTexts
+
+//endregion
+
+module.exports = {getClicksendContacts, getSpecifiedContactList}

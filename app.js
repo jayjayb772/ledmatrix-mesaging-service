@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) =>{
     debuglog("HOME")
-    getClicksendContacts()
     res.send("Hello World!");
 })
 

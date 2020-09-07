@@ -27,6 +27,7 @@
     "cross-fetch": "^3.0.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
+    "enum": "^3.0.4",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "http-errors": "~1.6.3",
