@@ -1,4 +1,5 @@
 const express = require('express')
+const {handleText} = require("../services/orchestratorService");
 const {clickSendTextDTO} = require('../DataObjects/clicksendTextDTO')
 const clickSendController = express.Router()
 const {debuglog} = require('../util/debugCommands')
@@ -19,5 +20,6 @@ clickSendController.post('/incoming-message', (req, res) =>{
    debuglog(text.message);
    debuglog("TIMESTAMP:");
    debuglog(text.timestamp);
+   handleText(text)
 });
 module.exports = clickSendController;
