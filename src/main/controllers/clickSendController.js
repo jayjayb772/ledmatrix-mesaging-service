@@ -12,7 +12,7 @@ clickSendController.get('/', (req, res)=>{
 clickSendController.post('/incoming-message', (req, res) =>{
    res.send().ok;
    debuglog("REQ PARAMS")
-   let from = req.params.from;
+   let from = req.body.from;
    debuglog("FROM:");
    debuglog(req.body.from);
    let message = req.body.message;

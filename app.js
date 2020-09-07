@@ -6,12 +6,14 @@ const app = express();
 const {debuglog} = require('./src/main/util/debugCommands');
 const ENV = process.env.ENV;
 const bodyParser = require('body-parser');
+const {getClicksendContacts} = require("./src/main/services/clickSendService");
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) =>{
     debuglog("HOME")
+    getClicksendContacts()
     res.send("Hello World!");
 })
 
