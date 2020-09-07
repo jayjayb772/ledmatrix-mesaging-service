@@ -12,6 +12,50 @@ function makeHeader() {
     return base64url.encode(temp);
 }
 
+function createSendSingleOptions(url, message, to) {
+    let body = JSON.stringify({
+        "messages": [
+            {
+                "source": "php",
+                "from": "+18339201336",
+                "body": message,
+                "to": to,
+                "custom_string": "this is a test"
+            }
+        ]
+    })
+    let options = {
+        "headers": {
+            "Authorization": `Basic ${makeHeader()}==`,
+            'content-type': 'application/json'
+        },
+        "body": body
+    }
+    return options
+}
+
+function createSendMultipleOptions(url, message, list_id) {
+    let body = JSON.stringify({
+        "messages": [
+            {
+                "source": "php",
+                "from": "+18339201336",
+                "body": message,
+                "list_id": list_id,
+                "custom_string": "this is a test"
+            }
+        ]
+    })
+    let options = {
+        "headers": {
+            "Authorization": `Basic ${makeHeader()}==`,
+            'content-type': 'application/json'
+        },
+        "body": body
+    }
+    return options
+}
+
 function createOptions(url) {
     let options = {
         headers: {
@@ -56,7 +100,7 @@ function determineFilter(lists, relationship) {
 async function getClicksendContacts() {
     let options = createOptions("https://rest.clicksend.com/v3/lists")
     let betterBody;
-    return new Promise(function (resolve, reject) {
+    return new Promise(async function (resolve, reject) {
         request.get(options, (err, res) => {
             if (err) {
                 //console.error(err);
@@ -94,7 +138,54 @@ async function getSpecifiedContactList(relationship) {
 //endregion
 
 //region sendTexts
+async function sendText(message, to) {
+    let url = "https://rest.clicksend.com/v3/sms/send"
+    let options = createSendSingleOptions(url, message, to)
+    debuglog("options created")
+    debuglog(options)
+    return new Promise(function (resolve, reject) {
+        request.post(url, options, (err, res) => {
+            if (res.body.http_code !== 200) {
+                reject(res.body)
+            }
+            if (err) {
+                //console.error(err);
+                reject(err)
+            } else {
+                resolve(res.body);
+            }
+        })
+    })
+}
+
+async function sendTextToList(message, relation) {
+    let url = "https://rest.clicksend.com/v3/sms/send"
+    return new Promise(async function (resolve, reject) {
+        await getSpecifiedContactList(relation).then(r => {
+            debuglog(r.body)
+            let options = createSendMultipleOptions(url, message, r[0].list_id)
+            debuglog("options created")
+            debuglog(options)
+            request.post(url, options, (err, res) => {
+                if (res.body.http_code !== 200) {
+                    reject(res.body)
+                }
+                if (err) {
+                    //console.error(err);
+                    reject(err)
+                } else {
+                    resolve(res.body);
+                }
+            })
+        }, err => {
+            console.log(err)
+        })
+
+    })
+
+
+}
 
 //endregion
 
-module.exports = {getClicksendContacts, getSpecifiedContactList}
+module.exports = {getClicksendContacts, getSpecifiedContactList, sendText, sendTextToList}

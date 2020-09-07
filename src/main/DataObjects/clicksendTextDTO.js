@@ -9,16 +9,13 @@ function clickSendTextDTO(clickSendTextBody){
 function sendSingleTextDTO(orchestratorReqBody){
     return {
         to:orchestratorReqBody.to,
-        message:orchestratorReqBody.message,
-        timestamp:orchestratorReqBody.timestamp
+        message:orchestratorReqBody.message
     }
 }
 function sendMultipleTextsDTO(orchestratorReqBody){
     return {
         relationship:orchestratorReqBody.relationship,
-        phoneNumbers:orchestratorReqBody.phoneNumbers,
-        message:orchestratorReqBody.message,
-        timestamp:orchestratorReqBody.timestamp
+        message:orchestratorReqBody.message
     }
 }
 
