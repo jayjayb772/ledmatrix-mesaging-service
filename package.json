@@ -36,7 +36,13 @@
     "mysql": "^2.18.1",
     "pug": "^2.0.4",
     "request": "^2.88.2",
-    "requests": "^0.3.0"
+    "requests": "^0.3.0",
+    "base64-url": "^2.3.3",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4",
+
   },
   "devDependencies": {
     "base64-url": "^2.3.3",
