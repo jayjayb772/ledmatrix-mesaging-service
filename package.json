@@ -41,8 +41,7 @@
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
     "swagger-jsdoc": "^4.0.0",
-    "swagger-ui-express": "^4.1.4",
-
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "base64-url": "^2.3.3",
