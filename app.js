@@ -1,10 +1,9 @@
 require('dotenv').config();
 const express = require('express');
-const clickSendController = require('./src/main/controllers/clickSendController')
-const orchestratorController = require('./src/main/controllers/orchestratorController')
+const orchestratorController  = require('./src/main/controllers/orchestratorController')
+const clickSendController= require('./src/main/controllers/clicksendController')
 const app = express();
 const {debuglog} = require('./src/main/util/debugCommands');
-const ENV = process.env.ENV;
 const bodyParser = require('body-parser');
 const {getClicksendContacts} = require("./src/main/services/clickSendService");
 const swaggerUi = require('swagger-ui-express');

@@ -1,5 +1,6 @@
 const base64url = require('base64-url')
 const request = require('request')
+const {newContactDTO} = require("../DataObjects/clicksendTextDTO");
 const {debuglog} = require("../util/debugCommands");
 
 
@@ -96,6 +97,35 @@ function determineFilter(lists, relationship) {
 
 //endregion
 
+//region createUser
+
+function makeCreateOptions(reqBody){
+    let body = JSON.stringify(reqBody)
+    let options = {
+        "headers": {
+            "Authorization": `Basic ${makeHeader()}==`,
+            'content-type': 'application/json'
+        },
+        "body": body
+    }
+    return options
+}
+
+async function createClicksendContact(reqBody){
+    //get contact list id from reqbody relationship
+    //inject into url
+
+    let user = newContactDTO(reqBody)
+    let url = "https://rest.clicksend.com/v3/lists/{list_id}/contacts"
+    return new Promise(((resolve, reject) => {
+        request.post(url, makeCreateOptions(user), (err, res)=>{
+
+        } )
+    }))
+}
+
+//endregion
+
 //region contactLists
 async function getClicksendContacts() {
     let options = createOptions("https://rest.clicksend.com/v3/lists")
@@ -185,7 +215,17 @@ async function sendTextToList(message, relation) {
 
 
 }
+//endregion
+
+//region searchContacts
+
+function searchContactLists(phoneNumber){
+    //make url https://rest.clicksend.com/v3/search/contacts-lists
+    //make options
+    //request
+    //get name back and return name
+}
 
 //endregion
 
-module.exports = {getClicksendContacts, getSpecifiedContactList, sendText, sendTextToList}
+module.exports = {getClicksendContacts, getSpecifiedContactList, sendText, sendTextToList, createClicksendContact}

@@ -19,4 +19,13 @@ function sendMultipleTextsDTO(orchestratorReqBody){
     }
 }
 
-module.exports = {clickSendTextDTO, sendSingleTextDTO, sendMultipleTextsDTO}
+function newContactDTO(reqBody){
+    return {
+        phone_number:reqBody.phone_number,
+        first_name:reqBody.first_name,
+        last_name: (reqBody.last_name !== "") ? reqBody.last_name : reqBody.relationship,
+        custom_1:reqBody.relationship
+    }
+}
+
+module.exports = {clickSendTextDTO, sendSingleTextDTO, sendMultipleTextsDTO, newContactDTO}
